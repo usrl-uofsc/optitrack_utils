@@ -1,0 +1,11 @@
+<launch>
+  <!-- Start the VRPN Client -->
+  <include file="$(find optitrack_utils)/launch/start_vrpn.launch"/>
+	
+  <!-- Start the VRPN State Filter -->
+  <rosparam command="load" file="$(find optitrack_utils)/cfg/m100_config.yaml"/>
+  <node name="filter" pkg="optitrack_utils" type="optitrack_state.py" output="screen"/>
+
+  <!-- Start the full State Publisher -->
+  <node name="state_pub" pkg="optitrack_utils" type="mocap_dji_state.py" output="screen"/>
+</launch>

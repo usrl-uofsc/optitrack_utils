@@ -1,0 +1,4 @@
+rate: 100.0
+vrpn_topic: /vrpn_client_node/Matrice_DIC/pose
+
+state_topic: /dic_uav/state
