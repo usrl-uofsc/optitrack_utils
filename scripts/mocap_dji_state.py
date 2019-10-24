@@ -25,6 +25,7 @@ class MocapNode():
 		# System state
 		self.isInit = False
 		self.timeBefore = None
+		self.stateCount = 0
 		self.state = ObservedState()
 		
 		# Set up Subscribers
@@ -76,6 +77,13 @@ class MocapNode():
 		r = rp.Rate(self.rate)
 		while not rp.is_shutdown():
 			if (self.isInit):
+				# Update header and publish
+				self.state.header.seq = self.stateCount
+				self.state.header.stamp = rp.Time.now()
+				self.state.header.frame_id = 'MoCap'
+				
+				self.stateCount += 1
+				
 				self.state_pub.publish(self.state)
 			
 			r.sleep()
